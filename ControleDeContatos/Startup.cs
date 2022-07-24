@@ -1,6 +1,9 @@
+using ControleDeContatos.Data;
+using ControleDeContatos.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -8,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ControleDeContatos.Services;
 
 namespace ControleDeContatos {
     public class Startup {
@@ -20,6 +24,10 @@ namespace ControleDeContatos {
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
             services.AddControllersWithViews();
+            services.AddDbContext<BancoContext>(options =>
+                   options.UseMySql(Configuration.GetConnectionString("DataBase"), builder => builder.MigrationsAssembly("ControleDeContatos")));
+
+            services.AddScoped<IContactService, ContactService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

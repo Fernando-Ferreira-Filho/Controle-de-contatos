@@ -1,4 +1,4 @@
-﻿using ControleDeContatos.Models;
+﻿using ControleDeContatos.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,6 +11,7 @@ namespace ControleDeContatos.Controllers {
     public class HomeController : Controller {
 
         public IActionResult Index() {
+
             return View();
         }
 

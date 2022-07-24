@@ -1,6 +1,6 @@
 using System;
 
-namespace ControleDeContatos.Models {
+namespace ControleDeContatos.Models.ViewModels {
     public class ErrorViewModel {
         public string RequestId { get; set; }
 
