@@ -8,6 +8,6 @@ namespace ControleDeContatos.Services {
         public List<Contact> ListAll();
         public Contact FindById(int id);
         public Contact Update(Contact contact);
-        public Contact Delete(Contact contact);
+        public bool Delete(int id);
     }
 }

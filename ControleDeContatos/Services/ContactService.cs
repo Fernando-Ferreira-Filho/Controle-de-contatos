@@ -45,17 +45,20 @@ namespace ControleDeContatos.Services {
             return contactDb;
         }
 
-        public Contact Delete(Contact contact) {
-            var obj = FindById(contact.Id);
-            if (obj == null) {
+        public bool Delete(int id) {
+            try {
+                var obj = FindById(id);
+                if (obj == null) {
+                    throw new System.Exception("Falha ao apagar");
+                }
+                _bancoContext.Contacts.Remove(obj);
+                _bancoContext.SaveChanges();
+                return true;
+            }
+            catch (System.Exception e) {
                 throw new System.Exception("Falha ao apagar");
             }
-            _bancoContext.Contacts.Remove(obj);
-            _bancoContext.SaveChanges();
-            return obj;
         }
-
-
 
     }
 }

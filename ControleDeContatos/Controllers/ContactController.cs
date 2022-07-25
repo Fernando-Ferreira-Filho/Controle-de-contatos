@@ -58,8 +58,8 @@ namespace ControleDeContatos.Controllers {
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(Contact contact) {
-            _contactService.Delete(contact);
+        public IActionResult Delete(int id) {
+            _contactService.Delete(id);
             return RedirectToAction("Index");
 
         }
