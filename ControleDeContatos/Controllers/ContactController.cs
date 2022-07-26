@@ -47,20 +47,57 @@ namespace ControleDeContatos.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Contact contato) {
-            _contactService.Add(contato);
-            return RedirectToAction("Index");
+            try {
+
+                if (!ModelState.IsValid) {
+                    return View(contato);
+                }
+
+                TempData["SuccessMessage"] = "Contato cadastrado com sucesso";
+                _contactService.Add(contato);
+                return RedirectToAction("Index");
+            }
+            catch (System.Exception e) {
+
+                TempData["ErrorMessage"] = $"Ops, não conseguimos cadastrar seu contato, tente novamente, detalhe do erro: {e.Message}";
+                return RedirectToAction("Index");
+            }
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(Contact contact) {
-            _contactService.Update(contact);
-            return RedirectToAction("Index");
+            try {
+                if (!ModelState.IsValid) {
+                    return View(contact);
+                }
+                TempData["SuccessMessage"] = "Contato alterado com sucesso";
+                _contactService.Update(contact);
+                return RedirectToAction("Index");
+            }
+            catch (System.Exception e) {
+                TempData["ErrorMessage"] = $"Ops, não conseguimos alterar seu contato, tente novamente, detalhe do erro: {e.Message}";
+                return RedirectToAction("Index");
+            }
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id) {
-            _contactService.Delete(id);
-            return RedirectToAction("Index");
+            try {
+                TempData["SuccessMessage"] = "Contato apagado com sucesso";
+                bool apagado = _contactService.Delete(id);
+                if (apagado) {
+                    TempData["SuccessMessage"] = "Contato apagado com sucesso";
+                }
+                else { TempData["ErrorMessage"] = $"Ops, não conseguimos excluir seu contato"; }
+                return RedirectToAction("Index");
+
+            }
+            catch (System.Exception e) {
+                TempData["ErrorMessage"] = $"Ops, não conseguimos excluir seu contato, tente novamente, detalhe do erro: {e.Message}";
+                return RedirectToAction("Index");
+            }
 
         }
     }

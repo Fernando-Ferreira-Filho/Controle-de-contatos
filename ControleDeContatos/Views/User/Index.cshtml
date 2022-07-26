@@ -1,0 +1,67 @@
+﻿@model IEnumerable<ControleDeContatos.Models.User>
+@{
+    ViewData["Title"] = "Listagem de Usuários";
+}
+
+<div class="">
+
+    <div class="d-grip gap-2 d-md-flex justify-content-md-start">
+        <a asp-action="Create" asp-controller="User" role="button" class="btn btn-primary">Adicionar novo usuário</a>
+    </div>
+    <br />
+
+    @if (TempData["SuccessMessage"] != null) {
+        <div class="alert alert-success text-center" role="alert">
+            <button type="button" class="btn btn-danger btn-sm close-alert" arial-label="Close">X</button>
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null) {
+        <div class="alert alert-danger text-center" role="alert">
+            <button type="button" class="btn btn-danger btn-sm close-alert" arial-label="Close">X</button>
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
+    <h1 class="display-4">Listagem de Usuarios</h1>
+    <br />
+    <table class="table text-center" id="table-user">
+        <thead>
+            <tr>
+                <th class="text-center" scope="col">#</th>
+                <th class="text-center" scope="col">@Html.DisplayNameFor(model => model.Name)</th>
+                <th class="text-center" scope="col">@Html.DisplayNameFor(model => model.Login)</th>
+                <th class="text-center" scope="col">@Html.DisplayNameFor(model => model.Email)</th>
+                <th class="text-center" scope="col">@Html.DisplayNameFor(model => model.Profile)</th>
+                <th class="text-center" scope="col">@Html.DisplayNameFor(model => model.AddDate)</th>
+
+                <th class="text-center" scope="col">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any()) {
+                @foreach (var item in Model) {
+                    <tr>
+                        <th scope="row">@item.Id</th>
+                        <td>@item.Name</td>
+                        <td>@item.Login</td>
+                        <td>@item.Email</td>
+                        <td>@item.Profile</td>
+                        <td>@item.AddDate</td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a role="button" class="btn btn-primary" asp-route-id="@item.Id" asp-controller="User" asp-action="Edit">Editar</a>
+                                <a role="button" class="btn btn-danger" asp-route-id="@item.Id" asp-controller="User" asp-action="Delete">Apagar</a>
+                            </div>
+                        </td>
+
+                    </tr>
+                }
+            }
+            else {
+                <tr class="odd"><td valign="top" colspan="5">Nenhum usuário encontrado</td></tr>
+            }
+        </tbody>
+    </table>
+</div>

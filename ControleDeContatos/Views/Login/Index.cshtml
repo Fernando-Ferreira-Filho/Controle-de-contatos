@@ -1,0 +1,29 @@
+﻿@model Login
+
+@{
+    Layout = "_layoutLogin";
+    ViewData["Title"] = "Login";
+}
+
+@if (TempData["ErrorMessage"] != null) {
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="btn btn-danger btn-sm close-alert" arial-label="Close">X</button>
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+<form asp-controller="Login" asp-action="Login" method="Post">
+    <div class="form-group">
+        <label for="login">Login</label>
+        <input type="text" class="form-control" asp-for="UserLogin" id="login" placeholder="Digite seu login de acesso">
+        <span asp-validation-for="@Model.UserLogin" class="text-danger"></span>
+
+    </div>
+    <div class="form-group">
+        <label for="senha">Senha</label>
+        <input type="password" class="form-control" asp-for="Password" id="senha" placeholder="Senha">
+        <span asp-validation-for="@Model.Password" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Entrar</button>
+</form>

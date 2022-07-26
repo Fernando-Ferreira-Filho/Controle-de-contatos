@@ -8,5 +8,6 @@ namespace ControleDeContatos.Data {
         }
 
         public DbSet<Contact> Contacts { get; set; }
+        public DbSet<User> User { get; set; }
     }
 }

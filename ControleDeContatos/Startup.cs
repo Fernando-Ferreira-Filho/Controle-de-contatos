@@ -28,6 +28,7 @@ namespace ControleDeContatos {
                    options.UseMySql(Configuration.GetConnectionString("DataBase"), builder => builder.MigrationsAssembly("ControleDeContatos")));
 
             services.AddScoped<IContactService, ContactService>();
+            services.AddScoped<IUserService, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,7 +51,7 @@ namespace ControleDeContatos {
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Login}/{action=Index}/{id?}");
             });
         }
     }

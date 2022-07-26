@@ -1,0 +1,52 @@
+﻿@using ControleDeContatos.Models.Enums
+@model ControleDeContatos.Models.User
+@{
+    ViewData["Title"] = "Criar usuário";
+}
+
+<div class="text-center">
+
+    <h1 class="display-4">Cadastrar usuário</h1>
+    <br />
+</div>
+
+<form asp-controller="User" asp-action="Create" method="post">
+
+    <div class="form-group">
+        <label for="name">Nome</label>
+        <input type="text" asp-for="Name" class="form-control" placeholder="Digite o nome do usuário">
+        <span asp-validation-for="@Model.Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="email">E-mail</label>
+        <input type="email" class="form-control" placeholder="Digite o e-mail do usuário" asp-for="Email">
+        <span asp-validation-for="@Model.Email" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="login">Login</label>
+        <input type="text" class="form-control" placeholder="Digite o login do usuário" asp-for="Login">
+        <span asp-validation-for="@Model.Login" class="text-danger"></span>
+    </div>
+
+
+    <div class="form-group">
+        <label for="login">Perfil</label>
+        <select asp-for="Profile" class="form-control">
+            <option value="">Selecione</option>
+            <option value="@ProfileEnum.Admin">Administrador</option>
+            <option value="@ProfileEnum.Standard">Padrão</option>
+            <span asp-validation-for="@Model.Login" class="text-danger"></span>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="login">Senha</label>
+        <input type="password" class="form-control" placeholder="Digite a senha do usuário" asp-for="Password">
+        <span asp-validation-for="@Model.Password" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Adicionar</button>
+    <a asp-action="Index" asp-controller="User" role="button" class="btn btn-secondary">Voltar</a>
+</form>
